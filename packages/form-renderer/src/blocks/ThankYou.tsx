@@ -4,18 +4,15 @@ import { useEffect } from 'react'
 
 import { isURL } from '../utils'
 
-import { useStore } from '../store'
 import { WelcomeBranding } from '../views/Branding'
 import type { BlockProps } from './Block'
 import { Block } from './Block'
 
 export const ThankYou: FC<BlockProps> = ({ field, className, children, ...restProps }) => {
-  const { state } = useStore()
-
   useEffect(() => {
     let redirectUrl = field.properties?.redirectUrl
 
-    if (state.customUrlRedirects && field.properties?.redirectOnCompletion && redirectUrl) {
+    if (field.properties?.redirectOnCompletion && redirectUrl) {
       const delay = (field.properties?.redirectDelay || 0) * 1_000
 
       if (!isURL(redirectUrl)) {
